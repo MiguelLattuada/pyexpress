@@ -11,6 +11,9 @@ class TestStringMethods(unittest.TestCase):
             :return:
             """
             print(req.hostname)
+            print(req.base_url)
+            print(req.method)
+            print(req.protocol)
 
         app = Application()
         app.get('/gohome', get_handler)

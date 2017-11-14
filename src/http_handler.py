@@ -47,7 +47,7 @@ class HttpHandler:
         :param src.http_request.HttpRequest http_request:
         :return:
         """
-        registry_entry_name = HttpHandler.name_constructor(http_request.method, http_request.resource)
+        registry_entry_name = HttpHandler.name_constructor(http_request.method, http_request.base_url)
         handler = self._registry.get(registry_entry_name)
         return handler
 

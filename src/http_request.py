@@ -6,15 +6,7 @@ class HttpRequest:
         The URL path matched
         :return:
         """
-        return self.resource
-
-    @property
-    def body(self):
-        return None
-
-    @property
-    def cookies(self):
-        return None
+        return self._resource
 
     @property
     def hostname(self):
@@ -24,6 +16,22 @@ class HttpRequest:
         """
         return self._hostname
 
+    @property
+    def method(self):
+        """
+        Contains a string corresponding to the HTTP method of the request: GET, POST, PUT, and so on.
+        :return:
+        """
+        return self._method
+
+    @property
+    def protocol(self):
+        """
+        Contains the request protocol string
+        :return:
+        """
+        return self._protocol
+
     def __init__(self, method, resource, protocol, header_fields):
         """
         Create a new instance of HttpRequest
@@ -32,10 +40,10 @@ class HttpRequest:
         :param str protocol:
         :param dict header_fields:
         """
-        self.method = method
-        self.resource = resource
-        self.protocol = protocol
-        self.header_fields = header_fields
+        self._method = method
+        self._resource = resource
+        self._protocol = protocol
+        self._header_fields = header_fields
         (self._hostname, self._port) = self.decouple_host_header()
 
     def decouple_host_header(self):
@@ -44,4 +52,4 @@ class HttpRequest:
         :return:
         """
         # TODO: Move helper methods to a separate class
-        return tuple(self.header_fields.get('host').split(':'))
+        return tuple(self._header_fields.get('host').split(':'))
