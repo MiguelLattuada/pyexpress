@@ -25,6 +25,6 @@ class HttpRequestParser:
             if len(parsed_field) > 1:
                 field_key = parsed_field[0]
                 field_value = parsed_field[1][1:]
-                _header_fields[field_key] = field_value
+                _header_fields[field_key.lower()] = field_value
 
         return HttpRequest(_method, _resource, _protocol, _header_fields)
