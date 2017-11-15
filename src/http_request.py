@@ -52,4 +52,4 @@ class HttpRequest:
         :return:
         """
         # TODO: Move helper methods to a separate class
-        return tuple(self._header_fields.get('host').split(':'))
+        return tuple(self._header_fields.get('host').split(':')) if self._header_fields.get('host') else ('', '')

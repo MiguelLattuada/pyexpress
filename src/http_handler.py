@@ -1,5 +1,5 @@
 from socket import socket
-from src.http_helper import HttpRequestParser
+from src.http_request_parser import HttpRequestParser
 
 
 class HttpHandler:
