@@ -1,6 +1,4 @@
 from src.http_common import HttpCommon
-from src.http_request import HttpRequest
-
 
 # TODO: Move to a better place
 # line break and inline space helper variables
@@ -15,10 +13,10 @@ class HttpResponseBuilder:
     """
 
     @staticmethod
-    def compose(http_request, response_status, response_headers, response_body):
+    def in_compose(http_request, response_status, response_headers, response_body):
         """
         Build a new http response string
-        :param http_request:
+        :param src.http_request.HttpRequest http_request:
         :param response_status:
         :param response_headers:
         :param response_body:
@@ -59,7 +57,7 @@ class HttpResponseBuilder:
         Ex. HTTP/1.1 200 OK
         :param str protocol:
         :param tuple response_status: Status code definition represented as a tuple Ex. (200, OK)
-        :return:
+        :return:http_request
         """
         return '{protocol}{space}{status[0]}{space}{status[1]}'.format(
             protocol=protocol,

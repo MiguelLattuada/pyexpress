@@ -1,5 +1,5 @@
-from socket import socket
-from src.http_request_parser import HttpRequestParser
+from src.http_request import HttpRequest
+from src.http_response import HttpResponse
 
 
 class HttpHandler:
@@ -30,16 +30,20 @@ class HttpHandler:
     def handle_connection(self, connection, address):
         """
         Handle incoming connection
-        :param socket connection:
+        :param socket.socket connection:
         :param (str, str) address:
         :return:
         """
         incoming_connection_data = connection.recv(1024)
-        http_request = HttpRequestParser.parse(incoming_connection_data)
+        http_request = HttpRequest.from_incoming_data(incoming_connection_data)
+        http_request.set_connection(connection)
+        http_response = HttpResponse.from_request(http_request)
         handler = self.match_handler(http_request)
         if handler:
-            handler(http_request)
-            connection.close()
+            handler(http_request, http_response)
+            # Remove after pipeline, as connection close will be piped at the end (middleware)
+            if connection.fileno() == -1:
+                connection.close()
 
     def match_handler(self, http_request):
         """

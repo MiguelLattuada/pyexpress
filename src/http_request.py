@@ -1,3 +1,4 @@
+
 class HttpRequest:
 
     @property
@@ -28,9 +29,17 @@ class HttpRequest:
     def protocol(self):
         """
         Contains the request protocol string
-        :return:
+        :returns:
         """
         return self._protocol
+
+    @property
+    def connection(self):
+        """
+        Returns http request related socket
+        :return:
+        """
+        return self._connection
 
     def __init__(self, method, resource, protocol, header_fields):
         """
@@ -45,6 +54,17 @@ class HttpRequest:
         self._protocol = protocol
         self._header_fields = header_fields
         (self._hostname, self._port) = self.decouple_host_header()
+        self.set_connection(None)
+
+    @classmethod
+    def from_incoming_data(cls, incoming_data):
+        """
+        Creates a new instance of HttpRequest based on incoming data
+        :param incoming_data:
+        :return:
+        """
+        from src.http_request_parser import HttpRequestParser
+        return HttpRequestParser.parse(incoming_data)
 
     def decouple_host_header(self):
         """
@@ -53,3 +73,11 @@ class HttpRequest:
         """
         # TODO: Move helper methods to a separate class
         return tuple(self._header_fields.get('host').split(':')) if self._header_fields.get('host') else ('', '')
+
+    def set_connection(self, connection):
+        """
+        Set socket connection
+        :param socket.socket | None connection:
+        :return:
+        """
+        self._connection = connection
