@@ -1,6 +1,5 @@
-from src.http_response_builder import HttpResponseBuilder
-from src.http_common import HttpCommon
-
+from builder import HttpResponseBuilder
+from ..common.constants import HttpConstants
 
 class HttpResponse:
 
@@ -28,7 +27,7 @@ class HttpResponse:
         """
         response = HttpResponseBuilder.in_compose(
             http_request=self._request,
-            response_status=HttpCommon.STATUS_OK,
+            response_status=HttpConstants.STATUS_OK,
             response_body=json_data,
             response_headers={
                 'Content-Type': 'application/json',

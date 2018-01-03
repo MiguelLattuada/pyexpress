@@ -1,4 +1,4 @@
-class HttpCommon:
+class HttpConstants:
     """
     Static members for most common HTTP attributes
     """

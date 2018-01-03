@@ -1,6 +1,5 @@
 import socket
 
-
 class Server(socket.socket):
 
     def __init__(self, family, type):
@@ -13,3 +12,4 @@ class Server(socket.socket):
             family=family,
             type=type
         )
+        

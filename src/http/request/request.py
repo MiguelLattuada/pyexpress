@@ -1,3 +1,4 @@
+from factory import create_instance
 
 class HttpRequest:
 
@@ -63,8 +64,7 @@ class HttpRequest:
         :param incoming_data:
         :return:
         """
-        from src.http_request_parser import HttpRequestParser
-        return HttpRequestParser.parse(incoming_data)
+        return create_instance(incoming_data)
 
     def decouple_host_header(self):
         """

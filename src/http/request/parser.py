@@ -1,5 +1,4 @@
-from src.http_request import HttpRequest
-
+from request import HttpRequest
 
 class HttpRequestParser:
 

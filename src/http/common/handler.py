@@ -1,5 +1,5 @@
-from src.http_request import HttpRequest
-from src.http_response import HttpResponse
+from ..request.request import HttpRequest
+from ..response.response import HttpResponse
 
 
 class HttpHandler:

@@ -1,4 +1,4 @@
-from src.http_common import HttpCommon
+from ..common.constants import HttpConstants
 
 # TODO: Move to a better place
 # line break and inline space helper variables
@@ -76,17 +76,9 @@ class HttpResponseBuilder:
         header_fields_string = ''
 
         if not response_headers or not len(response_headers):
-            header_fields_string += HttpCommon.CONTENT_TYPE_TEXT + l_b
+            header_fields_string += HttpConstants.CONTENT_TYPE_TEXT + l_b
         else:
             for field, field_value in response_headers.items():
                 header_fields_string += '{}: {}{}'.format(field, field_value, l_b)
 
         return header_fields_string
-
-
-# print(HttpResponseBuilder.compose(
-#     http_request=HttpRequest('GET', '/', 'HTTP1/1', {}),
-#     response_status=HttpCommon.STATUS_OK,
-#     response_headers=None,
-#     response_body='Hello world'
-# ))
